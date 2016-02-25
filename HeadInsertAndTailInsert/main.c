@@ -15,20 +15,21 @@
 #include "string.h"
 
 typedef int elemType;
+//构造节点
 typedef struct ListNode{
-
     int element;
     struct ListNode *next;
 }Node;
 
+//初始化链表
 void initList(Node *pNode){
 
     pNode = NULL;
     printf("%s函数执行，头结点初始化完成\n",__FUNCTION__);
 }
 
+//打印链表
 void printList(Node *pNode){
-
     if (pNode == NULL) {
         printf("%s函数执行，链表为空，打印失败\n",__FUNCTION__);
     }else{
@@ -64,7 +65,7 @@ Node *HeadInsert(Node *pNode){
         if (pNode == NULL) {
             pNode = pInsert;
         }else{
-
+            //注意下面语句的顺序，否则可能造成链断裂
             pInsert->next = pNode;
             pNode = pInsert;
         }
@@ -88,8 +89,8 @@ Node *HeadInsert(Node *pNode){
 //尾插法
 Node *TailInsert(Node *pNode){
 
-    Node *pInsert;
-    Node *pMove;
+    Node *pInsert; //要插入的节点
+    Node *pMove; //遍历链表的节点
     pInsert = (Node*)malloc(sizeof(Node));
     if (pInsert == NULL) {
         printf("%s函数执行，内存分配失败，建立链表失败\n",__FUNCTION__);
@@ -108,10 +109,11 @@ Node *TailInsert(Node *pNode){
     pMove = pNode;
     while (pInsert->element > 0) {
         if (pNode == NULL) {
+            //注意不要忘了修改pMove指针的指向，初始pMove一定要指向头节点
             pNode = pInsert;
             pMove = pNode;
         }else{
-
+            //遍历找到最后一个节点
             while (pMove->next != NULL) {
                 pMove = pMove->next;
             }
